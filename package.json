@@ -16,7 +16,7 @@
     "@angular/router": "^17.0.0",
     "@angular/ssr": "^17.0.0",
     "@nx/angular": "18.0.8",
-    "express": "^4.0.0",
+    "express": "^4.19.2",
     "rxjs": "^7.0.0",
     "tslib": "^2.0.0",
     "zone.js": "^0.14.0"

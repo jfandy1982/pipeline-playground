@@ -11,26 +11,27 @@ jobs:
   github_context:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Print GitHub context'
-        run: echo "${{ toJSON(github) }}"
-
-      - name: Output event data
-        run: echo "${{ toJSON(github.event) }}"
-
-      - name: Output some defined settings
-        run: echo "${{ toJSON(github.ref) }}"
-             echo "${{ toJSON(github.event.ref) }}"
-             echo "${{ toJSON(github.repository.master_branch) }}"
-
-      - name: Output some defined settings 2
-        run: echo "Action Name ${{ github.action }}"
-             echo "Actor ${{ github.actor }}"
-             echo "Base Ref ${{ github.base_ref }}"
-             echo "Event Name ${{ github.event_name }}"
-             echo "Head Ref ${{ github.head_ref }}"
-             echo "Triggering Ref ${{ github.ref }}"
-             echo "Triggering Ref Name ${{ github.ref_name }}"
-             echo "Ref Type ${{ github.ref_type }}"
-             echo "Repository ${{ github.repository }}"
-             echo "SHA ${{ github.sha }}"
-             echo "Triggering Actor ${{ github.triggering_actor }}"
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Show default environment variables
+        run: |
+          echo "The job_id is: $GITHUB_JOB"   # reference the default environment variables
+          echo "The id of this action is: $GITHUB_ACTION"   # reference the default environment variables
+          echo "The run id is: $GITHUB_RUN_ID"
+          echo "The GitHub Actor's username is: $GITHUB_ACTOR"
+          echo "GitHub SHA: $GITHUB_SHA"
+     

@@ -35,3 +35,32 @@ jobs:
           echo "The GitHub Actor's username is: $GITHUB_ACTOR"
           echo "GitHub SHA: $GITHUB_SHA"
      
+      - name: Output some defined settings 2
+        env:
+          GITHUB_ACTION: ${{ github.action }}
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_BASE_REF: ${{ github.base_ref }}
+          GITHUB_BASE_SHA: ${{ github.event.base.repo.sha }}
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          GITHUB_HEAD_REF: ${{ github.head_ref }}
+          GITHUB_HEAD_SHA: ${{ github.event.head.repo.sha }}
+          GITHUB_REF: ${{ github.ref }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+          GITHUB_REF_TYPE: ${{ github.ref_type }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_TRIGGERING_ACTOR: ${{ github.triggering_actor }}
+        run: |
+          echo "Action Name is $GITHUB_ACTION"
+          echo "Actor is $GITHUB_ACTOR"
+          echo "Base Ref is $GITHUB_BASE_REF"
+          echo "Base Sha is $GITHUB_BASE_SHA"
+          echo "Head Ref is $GITHUB_HEAD_REF"
+          echo "Head Sha is $GITHUB_HEAD_SHA"          
+          echo "Triggering Ref is $GITHUB_REF"
+          echo "Triggering Ref Name is $GITHUB_REF_NAME"
+          echo "Event Name is $GITHUB_EVENT_NAME"
+          echo "Ref Type is $GITHUB_REF_TYPE"
+          echo "Repository is $GITHUB_REPOSITORY"
+          echo "SHA is $GITHUB_SHA"
+          echo "Triggering Actor is $GITHUB_TRIGGERING_ACTOR"

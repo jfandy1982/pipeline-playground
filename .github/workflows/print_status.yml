@@ -15,6 +15,10 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
+      - name: Dump Event context
+        env:
+          EVENT_CONTEXT: ${{ toJson(github.event) }}
+        run: echo "$EVENT_CONTEXT"        
       - name: Dump job context
         env:
           JOB_CONTEXT: ${{ toJson(job) }}
@@ -42,6 +46,7 @@ jobs:
           GITHUB_BASE_REF: ${{ github.base_ref }}
           GITHUB_BASE_SHA: ${{ github.event.base.repo.sha }}
           GITHUB_EVENT_NAME: ${{ github.event_name }}
+          GITHUB_EVENT_ACTION: ${{ github.event.action }}
           GITHUB_HEAD_REF: ${{ github.head_ref }}
           GITHUB_HEAD_SHA: ${{ github.event.head.repo.sha }}
           GITHUB_REF: ${{ github.ref }}
@@ -60,6 +65,7 @@ jobs:
           echo "Triggering Ref is $GITHUB_REF"
           echo "Triggering Ref Name is $GITHUB_REF_NAME"
           echo "Event Name is $GITHUB_EVENT_NAME"
+          echo "Event Action is $GITHUB_EVENT_ACTION"
           echo "Ref Type is $GITHUB_REF_TYPE"
           echo "Repository is $GITHUB_REPOSITORY"
           echo "SHA is $GITHUB_SHA"

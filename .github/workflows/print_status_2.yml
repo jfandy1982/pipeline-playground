@@ -70,7 +70,7 @@ jobs:
           echo "Triggering Actor is $GITHUB_TRIGGERING_ACTOR"
           echo "PR Base Ref is $GITHUB_PR_BASE_REF"
           echo "After-SHA is $GITHUB_EVENT_AFTER_SHA"
-          echo "Before-SHA is $GITHUB_EVENT_BEFORE_AHS"
+          echo "Before-SHA is $GITHUB_EVENT_BEFORE_SHA"
       - name: 'Is it a `Pull`-request?'
         id: is-pr
         shell: bash

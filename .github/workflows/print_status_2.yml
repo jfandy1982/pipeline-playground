@@ -38,6 +38,10 @@ jobs:
           echo "The run id is: $GITHUB_RUN_ID"
           echo "The GitHub Actor's username is: $GITHUB_ACTOR"
           echo "GitHub SHA: $GITHUB_SHA"
+      - name: SHA von HEAD ausgeben
+        run: echo "$(git rev-parse HEAD)"
+      - name: SHA von HEAD~1 ausgeben
+        run: echo "$(git rev-parse HEAD~1)"
       - name: Output some defined settings 2
         env:
           GITHUB_ACTION: ${{ github.action }}
@@ -55,6 +59,7 @@ jobs:
           GITHUB_PR_BASE_REF: ${{ github.event.pull_request.base.ref }}
           GITHUB_EVENT_AFTER_SHA: ${{ github.event.after }}
           GITHUB_EVENT_BEFORE_SHA: ${{ github.event.before }}
+
         run: |
           echo "Action Name is $GITHUB_ACTION"
           echo "Actor is $GITHUB_ACTOR"

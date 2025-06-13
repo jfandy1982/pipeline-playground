@@ -11,6 +11,10 @@ jobs:
   github_context:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -38,16 +42,26 @@ jobs:
           echo "The run id is: $GITHUB_RUN_ID"
           echo "The GitHub Actor's username is: $GITHUB_ACTOR"
           echo "GitHub SHA: $GITHUB_SHA"
+      - name: SHA von HEAD ausgeben
+        run: echo "$(git rev-parse HEAD)"
+      - name: SHA von HEAD~1 ausgeben
+        run: echo "$(git rev-parse HEAD~1)"
+      - name: SHA von FETCH_HEAD ausgeben
+        run: echo "$(git rev-parse FETCH_HEAD)"
+      - name: SHA von MERGE_HEAD ausgeben
+        run: echo "$(git rev-parse MERGE_HEAD)"
+      - name: SHA von ORIG_HEAD ausgeben
+        run: echo "$(git rev-parse ORIG_HEAD)"
+      - name: Alle Git-Referenzen ausgeben
+        run: echo "$(git show-ref)"
       - name: Output some defined settings 2
         env:
           GITHUB_ACTION: ${{ github.action }}
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_BASE_REF: ${{ github.base_ref }}
-          GITHUB_BASE_SHA: ${{ github.event.base.repo.sha }}
           GITHUB_EVENT_NAME: ${{ github.event_name }}
           GITHUB_EVENT_ACTION: ${{ github.event.action }}
           GITHUB_HEAD_REF: ${{ github.head_ref }}
-          GITHUB_HEAD_SHA: ${{ github.event.head.repo.sha }}
           GITHUB_REF: ${{ github.ref }}
           GITHUB_REF_NAME: ${{ github.ref_name }}
           GITHUB_REF_TYPE: ${{ github.ref_type }}
@@ -55,13 +69,14 @@ jobs:
           GITHUB_SHA: ${{ github.sha }}
           GITHUB_TRIGGERING_ACTOR: ${{ github.triggering_actor }}
           GITHUB_PR_BASE_REF: ${{ github.event.pull_request.base.ref }}
+          GITHUB_EVENT_AFTER_SHA: ${{ github.event.after }}
+          GITHUB_EVENT_BEFORE_SHA: ${{ github.event.before }}
+
         run: |
           echo "Action Name is $GITHUB_ACTION"
           echo "Actor is $GITHUB_ACTOR"
           echo "Base Ref is $GITHUB_BASE_REF"
-          echo "Base Sha is $GITHUB_BASE_SHA"
           echo "Head Ref is $GITHUB_HEAD_REF"
-          echo "Head Sha is $GITHUB_HEAD_SHA"          
           echo "Triggering Ref is $GITHUB_REF"
           echo "Triggering Ref Name is $GITHUB_REF_NAME"
           echo "Event Name is $GITHUB_EVENT_NAME"
@@ -71,6 +86,8 @@ jobs:
           echo "SHA is $GITHUB_SHA"
           echo "Triggering Actor is $GITHUB_TRIGGERING_ACTOR"
           echo "PR Base Ref is $GITHUB_PR_BASE_REF"
+          echo "After-SHA is $GITHUB_EVENT_AFTER_SHA"
+          echo "Before-SHA is $GITHUB_EVENT_BEFORE_SHA"
       - name: 'Is it a `Pull`-request?'
         id: is-pr
         shell: bash

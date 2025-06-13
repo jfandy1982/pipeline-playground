@@ -46,6 +46,14 @@ jobs:
         run: echo "$(git rev-parse HEAD)"
       - name: SHA von HEAD~1 ausgeben
         run: echo "$(git rev-parse HEAD~1)"
+      - name: SHA von FETCH_HEAD ausgeben
+        run: echo "$(git rev-parse FETCH_HEAD)"
+      - name: SHA von MERGE_HEAD ausgeben
+        run: echo "$(git rev-parse MERGE_HEAD)"
+      - name: SHA von ORIG_HEAD ausgeben
+        run: echo "$(git rev-parse ORIG_HEAD)"
+      - name: Alle Git-Referenzen ausgeben
+        run: echo "$(git show-ref)"
       - name: Output some defined settings 2
         env:
           GITHUB_ACTION: ${{ github.action }}

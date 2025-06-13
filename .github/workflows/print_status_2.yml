@@ -1,6 +1,10 @@
-name: Print various contexts while executing a workflow
+name: Print various contexts while executing a workflow 2
 
 on:
+  pull_request:
+
+  push:
+
   workflow_dispatch:
 
 jobs:
@@ -34,7 +38,6 @@ jobs:
           echo "The run id is: $GITHUB_RUN_ID"
           echo "The GitHub Actor's username is: $GITHUB_ACTOR"
           echo "GitHub SHA: $GITHUB_SHA"
-
       - name: Output some defined settings 2
         env:
           GITHUB_ACTION: ${{ github.action }}
@@ -68,3 +71,10 @@ jobs:
           echo "SHA is $GITHUB_SHA"
           echo "Triggering Actor is $GITHUB_TRIGGERING_ACTOR"
           echo "PR Base Ref is $GITHUB_PR_BASE_REF"
+      - name: 'Is it a `Pull`-request?'
+        id: is-pr
+        shell: bash
+        env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+        run: |
+          echo "is-pr=${{ env.GITHUB_EVENT_NAME == 'pull_request' }}" >> $GITHUB_OUTPUT
